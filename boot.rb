@@ -5,10 +5,11 @@ require "sinatra"
 require 'cgi'
 require 'pp'
 
+require_relative 'git'
+
 def link_to_commit hash
   "<a href='/commits/#{hash}'>#{hash}</a>"
 end
-
 
 
 def display_form(content = nil)
