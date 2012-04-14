@@ -21,6 +21,9 @@ class ControlledV < Sinatra::Base
   def get_content hash
     @grist.get_content hash
   end
+
+  def get_commit_content hash
+    @grist.repo.commit(hash).tree.contents.first.data
   end
 
   def save content, branch = nil, filename = nil
@@ -48,7 +51,7 @@ class ControlledV < Sinatra::Base
   end
 
   get '/grist/:hash'do
-    display_form @grist.repo.commit(params[:hash]).tree.contents.first.data , params[:hash]
+    display_form get_commit_content(params[:hash]) , params[:hash]
   end
 
   get '/view/:hash' do
