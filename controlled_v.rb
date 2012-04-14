@@ -46,29 +46,10 @@ class ControlledV < Sinatra::Base
     link_to_object hash
   end
 
-
-
-  post '/paste' do
-    u = %x[cd rep/ && echo '#{params[:content]}' | git hash-object -w --stdin]
-    "<a href='/view/#{u}'>#{u}</a>"
   end
 
-  #get '/commits/:branch' do
-  #  display_form2 display_content(params[:branch]), params[:branch]
-  #end
-  #
-  #get '/view2/:hash' do
-  #  display_form display_content(params[:hash])
-  #end
-  #
   get '/view/:hash' do
-    display_form %x[cd rep/ && git cat-file -p #{params[:hash]}]
   end
-  #
-  #post '/view/:hash' do
-  #  u = %x[cd rep/ && echo '#{params[:content]}' | git hash-object -w --stdin]
-  #  "<a href='/view/#{u}'>#{u}</a>"
-  #end
 
   get '/' do
     display_form
