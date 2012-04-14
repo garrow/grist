@@ -30,8 +30,9 @@ class Grist
 
     tree_hash = repo.git.native :write_tree
     if branch and !branch.empty?
-      #TODO get all prev commits, convert to Grit
-      p_commit_hash = %x[ cd rep/ && git show-ref --heads --hash #{branch}]
+      #TODO get all prev commits
+      p_commit_hash = repo.git.native :show_ref, {}, '--heads', '--hash', branch
+      #p_commit_hash = %x[ cd rep/ && git show-ref --heads --hash #{branch}]
       p_commit_hash.chomp!
       previous_commits = " -p #{p_commit_hash}"
     else
