@@ -13,7 +13,7 @@ class Grist
     @repo
   end
 
-  def display_content hash
+  def get_content hash
     repo.blob(hash).data
   end
 

@@ -15,11 +15,12 @@ class ControlledV < Sinatra::Base
   end
 
   def link_to_object hash
-    "<a href='/view/#{hash}'>#{hash}</a>" if hash
+    "<a href='/grist/#{hash}'>#{hash}</a>" if hash
   end
 
-  def display_content hash
-    @grist.display_content hash
+  def get_content hash
+    @grist.get_content hash
+  end
   end
 
   def save content, branch = nil, filename = nil
@@ -46,9 +47,12 @@ class ControlledV < Sinatra::Base
     link_to_object hash
   end
 
+  get '/grist/:hash'do
+    display_form @grist.repo.commit(params[:hash]).tree.contents.first.data , params[:hash]
   end
 
   get '/view/:hash' do
+    "<pre>%s</pre>" % [get_content(params[:hash])]
   end
 
   get '/' do
