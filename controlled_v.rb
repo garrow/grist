@@ -10,7 +10,7 @@ require_relative 'grist'
 class ControlledV < Sinatra::Base
 
   def initialize
-    @grist = Grist.new '/Users/garrow/Dropbox/work/controlledv/rep/'
+    @grist = Grist.new '/Users/garrow/Dropbox/work/controlledv/workspace.git/'
     super
   end
 
