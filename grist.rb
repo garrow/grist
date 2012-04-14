@@ -41,7 +41,7 @@ class Grist
 
     commit_hash = repo.git.native :commit_tree, {}, tree_hash, previous_commits
 
-    branch ||= commit_hash.slice 0,7
+    branch ||= commit_hash
     update_ref = repo.git.native :update_ref,  {}, "refs/heads/#{branch}", commit_hash
     branch
   end
