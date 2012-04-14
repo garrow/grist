@@ -28,10 +28,10 @@ class ControlledV < Sinatra::Base
   end
 
   def display_form(content = '', branch = nil )
-    content = content.to_s
+    content = CGI.escapeHTML(content.to_s)
+    branch = branch.to_s
     action = '/save'
-    tpl = "<form method='post' action='%s'><input type='hidden' name='ref' value='%s'><textarea rows='20' cols='50'name='content'>%s</textarea><input type='submit' value='save'/></form>"
-    tpl % [ action, branch , CGI.escapeHTML(content) ]
+    erb :pasteform, :locals => { :content => content, :branch => branch, :action => action }
   end
 
   def escape string
